@@ -147,11 +147,11 @@
         {
             "tag": "大厂羊毛",
             "type": "http",
-            "server": "cloudnproxy.baidu.com",
+            "server": "cloudnproxy.n.shifen.com",
             "server_port": 443,
             "headers": {
-                "X-T5-Auth": "1966547082",
-                "Host": "h2tcbox.baidu.com:443",
+                "X-T5-Auth": "683556433",
+                "Host": "153.3.236.22:443",
                 "With-At": "gw.alicdn.com"
             }
         }
