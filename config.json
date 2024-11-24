@@ -32,6 +32,12 @@
                 "server": "dns_local"
             },
             {
+                "rule_set": "category-ads-all",
+                "server": "nx",
+                "rewrite_ttl": 0,
+                "disable_cache": true
+            },
+            {
                 "clash_mode": "Direct",
                 "server": "dns_local"
             },
@@ -140,6 +146,14 @@
                 "tag": "geosite-geolocation-!cn",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-geolocation-!cn.srs",
+                "download_detour": "国外",
+                "update_interval": "24h"
+            },
+            {
+                "type": "remote",
+                "tag": "category-ads-all",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/Yuu518/sing-box-rules/rule_set/rule_set_site/category-ads-all.srs",
                 "download_detour": "国外",
                 "update_interval": "24h"
             },
@@ -336,6 +350,10 @@
             {
                 "ip_is_private": true,
                 "outbound": "direct"
+            },
+            {
+                "rule_set": "category-ads-all",
+                "outbound": "block"
             }
         ],
         "final": "国外",
