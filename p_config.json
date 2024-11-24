@@ -100,9 +100,6 @@
         },
         "final": "dns_proxy",
         "strategy": "prefer_ipv4",
-        "lazy_cache": true,
-        "reverse_mapping": true,
-        "mapping_override": true,
         "independent_cache": true
     },
     "inbounds": [
