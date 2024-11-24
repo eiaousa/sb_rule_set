@@ -22,7 +22,7 @@
                 "address": "fakeip"
             },
             {
-                "tag": "nxdomain",
+                "tag": "nx",
                 "address": "rcode://success"
             }
         ],
