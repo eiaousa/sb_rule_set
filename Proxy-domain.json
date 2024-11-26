@@ -12,9 +12,8 @@
                 ".io",
                 ".dev"
             ],
-            "domain_keyword": [
-                "us.",
-                ".us"
+            "domain_regex": [
+                "(?<![a-zA-Z0-9])(?:\\.?us\\.)"
             ]
         }
     ]
