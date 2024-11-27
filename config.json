@@ -283,6 +283,11 @@
                 "outbound": "direct"
             },
             {
+                "port": 443,
+                "network": "udp",
+                "outbound": "block"
+            },
+            {
                 "clash_mode": "Global",
                 "outbound": "全局"
             },
