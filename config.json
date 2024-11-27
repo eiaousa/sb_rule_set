@@ -334,11 +334,18 @@
                 "outbound": "direct"
             },
             {
+                "package_name": [
+                    "com.blueocean.musicplayer"
+                ],
+                "outbound": "国内"
+            },
+            {
                 "rule_set": "category-ads-all",
                 "outbound": "block"
             }
         ],
         "final": "国外",
+        "find_process": true,
         "auto_detect_interface": true
     },
     "experimental": {
