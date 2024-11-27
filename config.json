@@ -13,6 +13,11 @@
                 "detour": "国外"
             },
             {
+                "tag": "dns_global",
+                "address": "h3://8.8.8.8/dns-query",
+                "detour": "全局"
+            },
+            {
                 "tag": "dns_local",
                 "address": "h3://223.5.5.5/dns-query",
                 "detour": "direct"
@@ -39,7 +44,7 @@
             },
             {
                 "clash_mode": "Global",
-                "server": "dns_proxy"
+                "server": "dns_global"
             },
             {
                 "rule_set": [
@@ -124,6 +129,11 @@
             "outbounds": [
                 "direct"
             ]
+        },
+        {
+            "type": "selector",
+            "tag": "全局",
+            "outbounds": ""
         }
     ],
     "route": {
@@ -274,7 +284,7 @@
             },
             {
                 "clash_mode": "Global",
-                "outbound": "国外"
+                "outbound": "全局"
             },
             {
                 "rule_set": [
