@@ -269,22 +269,22 @@
                 "outbound": "dns"
             },
             {
+                "clash_mode": "Direct",
+                "outbound": "direct"
+            },
+            {
+                "clash_mode": "Global",
+                "outbound": "全局"
+            },
+            {
                 "port": 853,
                 "network": "tcp",
                 "outbound": "block"
             },
             {
-                "clash_mode": "Direct",
-                "outbound": "direct"
-            },
-            {
                 "port": 443,
                 "network": "udp",
                 "outbound": "block"
-            },
-            {
-                "clash_mode": "Global",
-                "outbound": "全局"
             },
             {
                 "rule_set": [
