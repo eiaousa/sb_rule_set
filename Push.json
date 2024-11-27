@@ -2,7 +2,10 @@
     "version": 2,
     "rules": [
         {
-            "domain_suffix": ".push.apple.com",
+            "domain_suffix": [
+                ".push.apple.com",
+                ".ultramobile.com"
+            ],
             "domain_regex": "^(alt[1-8]-)?mtalk4?(-(staging|dev))?\\.google\\.com$"
         }
     ]
