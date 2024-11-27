@@ -80,11 +80,6 @@
                 "server": "dns_proxy"
             }
         ],
-        "fakeip": {
-            "enabled": true,
-            "inet4_range": "198.18.0.0/15",
-            "inet6_range": "fc00::/18"
-        },
         "final": "dns_proxy",
         "reverse_mapping": true,
         "strategy": "prefer_ipv4",
