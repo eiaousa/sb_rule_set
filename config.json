@@ -365,7 +365,6 @@
         },
         "clash_api": {
             "external_controller": "127.0.0.1:9090",
-            "external_ui_download_url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/dashboard.zip",
             "external_ui_download_detour": "国外",
             "external_ui": "ui"
         }
