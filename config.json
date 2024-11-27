@@ -33,6 +33,13 @@
         ],
         "rules": [
             {
+                "outbound": [
+                    "direct",
+                    "CN"
+                ],
+                "server": "dns_local"
+            },
+            {
                 "outbound": "any",
                 "server": "dns_local"
             },
