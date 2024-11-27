@@ -33,18 +33,18 @@
                 "server": "dns_local"
             },
             {
-                "rule_set": "category-ads-all",
-                "server": "nx",
-                "rewrite_ttl": 0,
-                "disable_cache": true
-            },
-            {
                 "clash_mode": "Direct",
                 "server": "dns_local"
             },
             {
                 "clash_mode": "Global",
                 "server": "dns_global"
+            },
+            {
+                "rule_set": "category-ads-all",
+                "server": "nx",
+                "rewrite_ttl": 0,
+                "disable_cache": true
             },
             {
                 "rule_set": [
