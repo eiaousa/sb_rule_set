@@ -18,10 +18,6 @@
                 "detour": "direct"
             },
             {
-                "tag": "remote",
-                "address": "fakeip"
-            },
-            {
                 "tag": "nx",
                 "address": "rcode://success"
             }
@@ -51,15 +47,6 @@
                     "Push"
                 ],
                 "server": "dns_local"
-            },
-            {
-                "query_type": [
-                    "A",
-                    "AAAA"
-                ],
-                "server": "remote",
-                "rewrite_ttl": 0,
-                "disable_cache": true
             },
             {
                 "rule_set": "Direct-domain",
@@ -94,6 +81,7 @@
             "inet6_range": "fc00::/18"
         },
         "final": "dns_proxy",
+        "reverse_mapping": true,
         "strategy": "prefer_ipv4",
         "independent_cache": true
     },
@@ -108,9 +96,8 @@
             ],
             "strict_route": true,
             "auto_route": true,
-            "stack": "gvisor",
-            "sniff": true,
-            "sniff_override_destination": false
+            "stack": "mixed",
+            "sniff": true
         }
     ],
     "outbounds": [
