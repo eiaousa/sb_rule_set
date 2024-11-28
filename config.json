@@ -34,6 +34,10 @@
         ],
         "rules": [
             {
+                "outbound": "本机直连",
+                "server": "dns_local"
+            },
+            {
                 "outbound": "any",
                 "server": "dns_local"
             },
@@ -47,14 +51,6 @@
             },
             {
                 "clash_mode": "规则模式",
-                "rule_set": [
-                    "Skip-https",
-                    "Push"
-                ],
-                "server": "dns_local"
-            },
-            {
-                "clash_mode": "规则模式",
                 "query_type": [
                     "A",
                     "AAAA"
@@ -62,6 +58,14 @@
                 "server": "dns_fake",
                 "rewrite_ttl": 0,
                 "disable_cache": true
+            },
+            {
+                "clash_mode": "规则模式",
+                "rule_set": [
+                    "Skip-https",
+                    "Push"
+                ],
+                "server": "dns_local"
             },
             {
                 "clash_mode": "规则模式",
