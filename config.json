@@ -10,13 +10,11 @@
             {
                 "tag": "dns_proxy",
                 "address": "tls://1.0.0.1/dns-query",
-                "strategy": "ipv4_only",
                 "detour": "国外出站"
             },
             {
                 "tag": "dns_global",
                 "address": "tls://1.0.0.1/dns-query",
-                "strategy": "ipv4_only",
                 "detour": "全局代理"
             },
             {
@@ -28,6 +26,10 @@
                 "tag": "dns_local",
                 "address": "local",
                 "detour": "本机直连"
+            },
+            {
+                "tag": "dns_fake",
+                "address": "fakeip"
             }
         ],
         "rules": [
@@ -50,6 +52,16 @@
                     "Push"
                 ],
                 "server": "dns_local"
+            },
+            {
+                "clash_mode": "规则模式",
+                "query_type": [
+                    "A",
+                    "AAAA"
+                ],
+                "server": "dns_fake",
+                "rewrite_ttl": 0,
+                "disable_cache": true
             },
             {
                 "clash_mode": "规则模式",
@@ -82,7 +94,13 @@
                 "server": "dns_proxy"
             }
         ],
+        "fakeip": {
+            "enabled": true,
+            "inet4_range": "28.0.0.0/8",
+            "inet6_range": "fc00::/18"
+        },
         "final": "dns_proxy",
+        "strategy": "prefer_ipv4",
         "reverse_mapping": true,
         "independent_cache": true
     },
@@ -95,10 +113,12 @@
                 "172.18.0.1/30",
                 "fdfe:dcba:9876::1/126"
             ],
+            "mtu": 9000,
             "strict_route": true,
             "auto_route": true,
             "stack": "mixed",
-            "sniff": true
+            "sniff": true,
+            "sniff_override_destination": true
         }
     ],
     "outbounds": [
