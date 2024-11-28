@@ -14,12 +14,6 @@
                 "detour": "国外"
             },
             {
-                "tag": "dns_global",
-                "address": "https://1.1.1.1/dns-query",
-                "strategy": "ipv4_only",
-                "detour": "全局"
-            },
-            {
                 "tag": "dns_direct",
                 "address": "https://223.5.5.5/dns-query",
                 "detour": "国内"
@@ -32,10 +26,7 @@
         ],
         "rules": [
             {
-                "outbound": [
-                    "any",
-                    "direct"
-                ],
+                "outbound": "any",
                 "server": "dns_local"
             },
             {
@@ -44,7 +35,7 @@
             },
             {
                 "clash_mode": "Global",
-                "server": "dns_global"
+                "server": "dns_proxy"
             },
             {
                 "rule_set": [
@@ -123,11 +114,6 @@
             "outbounds": [
                 "direct"
             ]
-        },
-        {
-            "type": "selector",
-            "tag": "全局",
-            "outbounds": ""
         }
     ],
     "route": {
@@ -273,7 +259,7 @@
             },
             {
                 "clash_mode": "Global",
-                "outbound": "全局"
+                "outbound": "国外"
             },
             {
                 "port": 853,
