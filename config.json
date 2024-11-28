@@ -44,6 +44,7 @@
                 "server": "dns_global"
             },
             {
+                "clash_mode": "规则模式",
                 "rule_set": [
                     "Skip-https",
                     "Push"
@@ -51,10 +52,12 @@
                 "server": "dns_local"
             },
             {
+                "clash_mode": "规则模式",
                 "rule_set": "Direct-domain",
                 "server": "dns_direct"
             },
             {
+                "clash_mode": "规则模式",
                 "rule_set": [
                     "geosite-tiktok@!cn",
                     "Proxy-domain"
@@ -62,6 +65,7 @@
                 "server": "dns_proxy"
             },
             {
+                "clash_mode": "规则模式",
                 "rule_set": [
                     "geosite-cn",
                     "geosite-bytedance",
@@ -73,6 +77,7 @@
                 "server": "dns_direct"
             },
             {
+                "clash_mode": "规则模式",
                 "rule_set": "geosite-geolocation-!cn",
                 "server": "dns_proxy"
             }
@@ -273,16 +278,19 @@
                 "outbound": "全局代理"
             },
             {
+                "clash_mode": "规则模式",
                 "port": 853,
                 "network": "tcp",
                 "outbound": "流量拦截"
             },
             {
+                "clash_mode": "规则模式",
                 "port": 443,
                 "network": "udp",
                 "outbound": "流量拦截"
             },
             {
+                "clash_mode": "规则模式",
                 "rule_set": [
                     "Skip-https",
                     "Push"
@@ -290,10 +298,12 @@
                 "outbound": "本机直连"
             },
             {
+                "clash_mode": "规则模式",
                 "rule_set": "Direct-domain",
                 "outbound": "国内出站"
             },
             {
+                "clash_mode": "规则模式",
                 "rule_set": [
                     "geosite-tiktok@!cn",
                     "Proxy-domain"
@@ -301,6 +311,7 @@
                 "outbound": "国外出站"
             },
             {
+                "clash_mode": "规则模式",
                 "rule_set": [
                     "geosite-cn",
                     "geosite-bytedance",
@@ -312,18 +323,22 @@
                 "outbound": "国内出站"
             },
             {
+                "clash_mode": "规则模式",
                 "rule_set": "geosite-geolocation-!cn",
                 "outbound": "国外出站"
             },
             {
+                "clash_mode": "规则模式",
                 "rule_set": "Puship",
                 "outbound": "本机直连"
             },
             {
+                "clash_mode": "规则模式",
                 "rule_set": "geoip-cn",
                 "outbound": "国内出站"
             },
             {
+                "clash_mode": "规则模式",
                 "ip_cidr": [
                     "0.0.0.0/8",
                     "127.0.0.0/8",
@@ -336,6 +351,7 @@
                 "outbound": "本机直连"
             },
             {
+                "clash_mode": "规则模式",
                 "ip_is_private": true,
                 "outbound": "本机直连"
             }
@@ -352,6 +368,7 @@
         "clash_api": {
             "external_controller": "127.0.0.1:9090",
             "default_mode": "规则模式",
+            "external_ui_download_url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/dashboard.zip",
             "external_ui_download_detour": "国外出站",
             "external_ui": "ui"
         }
