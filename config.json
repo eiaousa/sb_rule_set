@@ -281,6 +281,11 @@
                 "outbound": "block"
             },
             {
+                "port": 443,
+                "network": "udp",
+                "outbound": "block"
+            },
+            {
                 "rule_set": [
                     "Skip-https",
                     "Push"
