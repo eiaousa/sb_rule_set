@@ -11,17 +11,23 @@
                 "tag": "dns_proxy",
                 "address": "https://1.1.1.1/dns-query",
                 "strategy": "ipv4_only",
-                "detour": "国外"
+                "detour": "国外出站"
+            },
+            {
+                "tag": "dns_global",
+                "address": "https://1.1.1.1/dns-query",
+                "strategy": "ipv4_only",
+                "detour": "全局代理"
             },
             {
                 "tag": "dns_direct",
                 "address": "https://223.5.5.5/dns-query",
-                "detour": "国内"
+                "detour": "国内出站"
             },
             {
                 "tag": "dns_local",
                 "address": "local",
-                "detour": "direct"
+                "detour": "本机直连"
             }
         ],
         "rules": [
@@ -30,19 +36,19 @@
                 "server": "dns_local"
             },
             {
-                "clash_mode": "Direct",
+                "clash_mode": "本机直连",
                 "server": "dns_local"
             },
             {
-                "clash_mode": "Global",
-                "server": "dns_proxy"
+                "clash_mode": "全局代理",
+                "server": "dns_global"
             },
             {
                 "rule_set": [
                     "Skip-https",
                     "Push"
                 ],
-                "server": "dns_direct"
+                "server": "dns_local"
             },
             {
                 "rule_set": "Direct-domain",
@@ -97,23 +103,28 @@
         },
         {
             "type": "direct",
-            "tag": "direct"
+            "tag": "本机直连"
         },
         {
             "type": "block",
-            "tag": "block"
+            "tag": "流量拦截"
         },
         {
             "type": "selector",
-            "tag": "国外",
+            "tag": "国外出站",
             "outbounds": ""
         },
         {
             "type": "selector",
-            "tag": "国内",
+            "tag": "国内出站",
             "outbounds": [
-                "direct"
+                "本机直连"
             ]
+        },
+        {
+            "type": "selector",
+            "tag": "全局代理",
+            "outbounds": ""
         }
     ],
     "route": {
@@ -123,7 +134,7 @@
                 "tag": "geosite-geolocation-!cn",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-geolocation-!cn.srs",
-                "download_detour": "国外",
+                "download_detour": "国外出站",
                 "update_interval": "24h"
             },
             {
@@ -131,7 +142,7 @@
                 "tag": "category-ads-all",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/Yuu518/sing-box-rules/rule_set/rule_set_site/category-ads-all.srs",
-                "download_detour": "国外",
+                "download_detour": "国外出站",
                 "update_interval": "24h"
             },
             {
@@ -139,7 +150,7 @@
                 "tag": "geosite-tiktok@!cn",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-tiktok@!cn.srs",
-                "download_detour": "国外",
+                "download_detour": "国外出站",
                 "update_interval": "24h"
             },
             {
@@ -147,7 +158,7 @@
                 "tag": "geosite-bytedance",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-bytedance.srs",
-                "download_detour": "国外",
+                "download_detour": "国外出站",
                 "update_interval": "24h"
             },
             {
@@ -155,7 +166,7 @@
                 "tag": "geosite-apple@cn",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-apple@cn.srs",
-                "download_detour": "国外",
+                "download_detour": "国外出站",
                 "update_interval": "24h"
             },
             {
@@ -163,7 +174,7 @@
                 "tag": "geosite-microsoft@cn",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-microsoft@cn.srs",
-                "download_detour": "国外",
+                "download_detour": "国外出站",
                 "update_interval": "24h"
             },
             {
@@ -171,7 +182,7 @@
                 "tag": "geosite-category-games@cn",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-category-games@cn.srs",
-                "download_detour": "国外",
+                "download_detour": "国外出站",
                 "update_interval": "24h"
             },
             {
@@ -179,7 +190,7 @@
                 "tag": "geoip-cn",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs",
-                "download_detour": "国外",
+                "download_detour": "国外出站",
                 "update_interval": "24h"
             },
             {
@@ -187,7 +198,7 @@
                 "tag": "geosite-cn",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-cn.srs",
-                "download_detour": "国外",
+                "download_detour": "国外出站",
                 "update_interval": "24h"
             },
             {
@@ -195,7 +206,7 @@
                 "tag": "geosite-category-companies@cn",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-category-companies@cn.srs",
-                "download_detour": "国外",
+                "download_detour": "国外出站",
                 "update_interval": "24h"
             },
             {
@@ -203,7 +214,7 @@
                 "tag": "Proxy-domain",
                 "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Proxy-domain.json",
                 "format": "source",
-                "download_detour": "国外",
+                "download_detour": "国外出站",
                 "update_interval": "24h"
             },
             {
@@ -211,7 +222,7 @@
                 "tag": "Direct-domain",
                 "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Direct-domain.json",
                 "format": "source",
-                "download_detour": "国外",
+                "download_detour": "国外出站",
                 "update_interval": "24h"
             },
             {
@@ -219,7 +230,7 @@
                 "tag": "Push",
                 "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Push.json",
                 "format": "source",
-                "download_detour": "国外",
+                "download_detour": "国外出站",
                 "update_interval": "24h"
             },
             {
@@ -227,7 +238,7 @@
                 "tag": "Puship",
                 "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Puship.json",
                 "format": "source",
-                "download_detour": "国外",
+                "download_detour": "国外出站",
                 "update_interval": "24h"
             },
             {
@@ -235,7 +246,7 @@
                 "tag": "Skip-https",
                 "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Skip-https.json",
                 "format": "source",
-                "download_detour": "国外",
+                "download_detour": "国外出站",
                 "update_interval": "24h"
             }
         ],
@@ -254,40 +265,40 @@
                 "outbound": "dns"
             },
             {
-                "clash_mode": "Direct",
-                "outbound": "direct"
+                "clash_mode": "本机直连",
+                "outbound": "本机直连"
             },
             {
-                "clash_mode": "Global",
-                "outbound": "国外"
+                "clash_mode": "全局代理",
+                "outbound": "全局代理"
             },
             {
                 "port": 853,
                 "network": "tcp",
-                "outbound": "block"
+                "outbound": "流量拦截"
             },
             {
                 "port": 443,
                 "network": "udp",
-                "outbound": "block"
+                "outbound": "流量拦截"
             },
             {
                 "rule_set": [
                     "Skip-https",
                     "Push"
                 ],
-                "outbound": "direct"
+                "outbound": "本机直连"
             },
             {
                 "rule_set": "Direct-domain",
-                "outbound": "国内"
+                "outbound": "国内出站"
             },
             {
                 "rule_set": [
                     "geosite-tiktok@!cn",
                     "Proxy-domain"
                 ],
-                "outbound": "国外"
+                "outbound": "国外出站"
             },
             {
                 "rule_set": [
@@ -298,19 +309,19 @@
                     "geosite-category-games@cn",
                     "geosite-category-companies@cn"
                 ],
-                "outbound": "国内"
+                "outbound": "国内出站"
             },
             {
                 "rule_set": "geosite-geolocation-!cn",
-                "outbound": "国外"
+                "outbound": "国外出站"
             },
             {
                 "rule_set": "Puship",
-                "outbound": "direct"
+                "outbound": "本机直连"
             },
             {
                 "rule_set": "geoip-cn",
-                "outbound": "国内"
+                "outbound": "国内出站"
             },
             {
                 "ip_cidr": [
@@ -322,14 +333,14 @@
                     "fc70::/10",
                     "fe80::/10"
                 ],
-                "outbound": "direct"
+                "outbound": "本机直连"
             },
             {
                 "ip_is_private": true,
-                "outbound": "direct"
+                "outbound": "本机直连"
             }
         ],
-        "final": "国外",
+        "final": "国外出站",
         "find_process": true,
         "auto_detect_interface": true
     },
@@ -340,7 +351,8 @@
         },
         "clash_api": {
             "external_controller": "127.0.0.1:9090",
-            "external_ui_download_detour": "国外",
+            "default_mode": "规则模式",
+            "external_ui_download_detour": "国外出站",
             "external_ui": "ui"
         }
     }
