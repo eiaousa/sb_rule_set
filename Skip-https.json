@@ -7,8 +7,10 @@
             ],
             "domain_keyword": [
                 "stun",
-                "ntp",
-                "time"
+                "ntp.",
+                ".ntp",
+                ".time",
+                "time."
             ],
             "domain_suffix": [
                 ".market.xiaomi.com",
