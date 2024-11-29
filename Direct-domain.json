@@ -9,7 +9,7 @@
                 "wxpay",
                 "wxmp",
                 "miniprogram",
-                "tencent",
+                // "tencent",
                 "tenpay"
             ],
             "domain": [
