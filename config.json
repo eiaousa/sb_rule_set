@@ -321,7 +321,6 @@
                 "outbound": "国外出站"
             },
             {
-                "clash_mode": "规则模式",
                 "rule_set": [
                     "Skip-https",
                     "Push"
