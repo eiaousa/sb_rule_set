@@ -50,6 +50,13 @@
                 "server": "dns_global"
             },
             {
+                "rule_set": [
+                    "Skip-https",
+                    "Push"
+                ],
+                "server": "dns_direct"
+            },
+            {
                 "clash_mode": "规则模式",
                 "query_type": [
                     "A",
@@ -66,14 +73,6 @@
                     "Proxy-domain"
                 ],
                 "server": "dns_proxy"
-            },
-            {
-                "clash_mode": "规则模式",
-                "rule_set": [
-                    "Skip-https",
-                    "Push"
-                ],
-                "server": "dns_direct"
             },
             {
                 "clash_mode": "规则模式",
