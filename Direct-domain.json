@@ -2,16 +2,6 @@
     "version": 2,
     "rules": [
         {
-            "domain_keyword": [
-                "wx.qlogo",
-                "weixin",
-                "wechat",
-                "wxpay",
-                "wxmp",
-                "miniprogram",
-                // "tencent",
-                "tenpay"
-            ],
             "domain": [
                 "hb.883875.xyz",
                 "ipv63.883875.xyz"
