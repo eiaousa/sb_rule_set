@@ -13,11 +13,6 @@
                 ".dev"
             ],
             "domain_keyword": [
-                "long.wechat",
-                "short.wechat",
-                "long.weixin",
-                "short.weixin",
-                "dns.weixin",
                 "us.",
                 ".us"
             ]
