@@ -62,23 +62,18 @@
             {
                 "clash_mode": "规则模式",
                 "rule_set": [
-                    "Skip-https",
-                    "Push"
-                ],
-                "server": "dns_local"
-            },
-            {
-                "clash_mode": "规则模式",
-                "rule_set": "Direct-domain",
-                "server": "dns_local"
-            },
-            {
-                "clash_mode": "规则模式",
-                "rule_set": [
                     "geosite-tiktok@!cn",
                     "Proxy-domain"
                 ],
                 "server": "dns_proxy"
+            },
+            {
+                "clash_mode": "规则模式",
+                "rule_set": [
+                    "Skip-https",
+                    "Push"
+                ],
+                "server": "dns_direct"
             },
             {
                 "clash_mode": "规则模式",
@@ -90,6 +85,11 @@
                     "geosite-category-games@cn",
                     "geosite-category-companies@cn"
                 ],
+                "server": "dns_direct"
+            },
+            {
+                "clash_mode": "规则模式",
+                "rule_set": "Direct-domain",
                 "server": "dns_direct"
             },
             {
@@ -316,23 +316,18 @@
             {
                 "clash_mode": "规则模式",
                 "rule_set": [
-                    "Skip-https",
-                    "Push"
-                ],
-                "outbound": "本机直连"
-            },
-            {
-                "clash_mode": "规则模式",
-                "rule_set": "Direct-domain",
-                "outbound": "国内出站"
-            },
-            {
-                "clash_mode": "规则模式",
-                "rule_set": [
                     "geosite-tiktok@!cn",
                     "Proxy-domain"
                 ],
                 "outbound": "国外出站"
+            },
+            {
+                "clash_mode": "规则模式",
+                "rule_set": [
+                    "Skip-https",
+                    "Push"
+                ],
+                "outbound": "本机直连"
             },
             {
                 "clash_mode": "规则模式",
@@ -344,6 +339,11 @@
                     "geosite-category-games@cn",
                     "geosite-category-companies@cn"
                 ],
+                "outbound": "国内出站"
+            },
+            {
+                "clash_mode": "规则模式",
+                "rule_set": "Direct-domain",
                 "outbound": "国内出站"
             },
             {
