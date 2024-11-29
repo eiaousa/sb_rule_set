@@ -19,7 +19,7 @@
             },
             {
                 "tag": "dns_direct",
-                "address": "quic://1.12.12.12",
+                "address": "quic://223.6.6.6",
                 "detour": "国内出站"
             },
             {
