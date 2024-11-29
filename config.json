@@ -9,17 +9,17 @@
         "servers": [
             {
                 "tag": "dns_proxy",
-                "address": "quic://8.8.4.4",
+                "address": "tls://8.8.4.4/dns-query",
                 "detour": "国外出站"
             },
             {
                 "tag": "dns_global",
-                "address": "quic://8.8.4.4",
+                "address": "tls://8.8.4.4/dns-query",
                 "detour": "全局代理"
             },
             {
                 "tag": "dns_direct",
-                "address": "quic://223.6.6.6",
+                "address": "tls://1.12.12.12/dns-query",
                 "detour": "国内出站"
             },
             {
