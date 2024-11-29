@@ -54,7 +54,7 @@
                     "Skip-https",
                     "Push"
                 ],
-                "server": "dns_direct"
+                "server": "dns_local"
             },
             {
                 "clash_mode": "规则模式",
