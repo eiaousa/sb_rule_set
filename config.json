@@ -140,19 +140,22 @@
         {
             "type": "selector",
             "tag": "国外出站",
-            "outbounds": ""
+            "outbounds": "",
+            "interrupt_exist_connections": true
         },
         {
             "type": "selector",
             "tag": "国内出站",
             "outbounds": [
                 "本机直连"
-            ]
+            ],
+            "interrupt_exist_connections": true
         },
         {
             "type": "selector",
             "tag": "全局代理",
-            "outbounds": ""
+            "outbounds": "",
+            "interrupt_exist_connections": true
         }
     ],
     "route": {
