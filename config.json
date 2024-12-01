@@ -30,6 +30,10 @@
             {
                 "tag": "dns_fake",
                 "address": "fakeip"
+            },
+            {
+                "tag": "ad",
+                "address": "rcode://success"
             }
         ],
         "rules": [
@@ -55,6 +59,13 @@
                     "Push"
                 ],
                 "server": "dns_local"
+            },
+            {
+                "clash_mode": "规则模式",
+                "rule_set": "BanAD",
+                "server": "ad",
+                "rewrite_ttl": 0,
+                "disable_cache": true
             },
             {
                 "clash_mode": "规则模式",
@@ -169,9 +180,9 @@
             },
             {
                 "type": "remote",
-                "tag": "category-ads-all",
+                "tag": "BanAD",
                 "format": "binary",
-                "url": "https://raw.githubusercontent.com/Yuu518/sing-box-rules/rule_set/rule_set_site/category-ads-all.srs",
+                "url": "https://raw.githubusercontent.com/KaringX/karing-ruleset/sing/ACL4SSR/BanADCompany.srs",
                 "download_detour": "国外出站"
             },
             {
@@ -364,6 +375,11 @@
                 "clash_mode": "规则模式",
                 "ip_is_private": true,
                 "outbound": "本机直连"
+            },
+            {
+                "clash_mode": "规则模式",
+                "rule_set": "BanAD",
+                "outbound": "流量拦截"
             }
         ],
         "final": "国外出站",
