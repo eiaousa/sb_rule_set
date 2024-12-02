@@ -19,7 +19,7 @@
             },
             {
                 "tag": "dns_direct",
-                "address": "tls://1.12.12.12/dns-query",
+                "address": "tls://223.6.6.6/dns-query",
                 "detour": "国内出站"
             },
             {
