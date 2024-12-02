@@ -56,7 +56,6 @@
             {
                 "rule_set": [
                     "Skip-https",
-                    "LocalAreaNetwork",
                     "Push"
                 ],
                 "server": "dns_local"
@@ -172,13 +171,6 @@
     ],
     "route": {
         "rule_set": [
-            {
-                "type": "remote",
-                "tag": "LocalAreaNetwork",
-                "format": "binary",
-                "url": "https://raw.githubusercontent.com/KaringX/karing-ruleset/sing/ACL4SSR/LocalAreaNetwork.srs",
-                "download_detour": "国外出站"
-            },
             {
                 "type": "remote",
                 "tag": "geosite-geolocation-!cn",
@@ -368,7 +360,15 @@
             },
             {
                 "clash_mode": "规则模式",
-                "rule_set": "LocalAreaNetwork",
+                "ip_cidr": [
+                    "0.0.0.0/8",
+                    "127.0.0.0/8",
+                    "192.168.0.0/16",
+                    "::/128",
+                    "::1/128",
+                    "fc70::/10",
+                    "fe80::/10"
+                ],
                 "outbound": "本机直连"
             },
             {
