@@ -1,11 +1,11 @@
 {
-    "version": 2,
-    "rules": [
-        {
-            "domain": [
-                "hb.883875.xyz",
-                "ipv63.883875.xyz"
-            ]
-        }
-    ]
+	"version": 2,
+	"rules": [
+		{
+			"domain": [
+				"hb.883875.xyz",
+				"ipv63.883875.xyz"
+			]
+		}
+	]
 }

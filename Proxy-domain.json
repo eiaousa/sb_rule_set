@@ -1,23 +1,23 @@
 {
-    "version": 2,
-    "rules": [
-        {
-            "domain_suffix": [
-                ".xn--ngstr-lra8j.com",
-                ".googleapis.cn",
-                ".idcoffer.com",
-                ".appinn.com",
-                ".t-mobile.com",
-                ".3gppnetwork.org",
-                ".io",
-                ".dev"
-            ],
-            "domain_keyword": [
-                "us.",
-                ".us",
-                ".org",
-                "vhdns"
-            ]
-        }
-    ]
+	"version": 2,
+	"rules": [
+		{
+			"domain_suffix": [
+				".xn--ngstr-lra8j.com",
+				".googleapis.cn",
+				".idcoffer.com",
+				".appinn.com",
+				".t-mobile.com",
+				".3gppnetwork.org",
+				".io",
+				".dev"
+			],
+			"domain_keyword": [
+				"us.",
+				".us",
+				".org",
+				"vhdns"
+			]
+		}
+	]
 }
