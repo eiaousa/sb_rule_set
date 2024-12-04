@@ -1,400 +1,400 @@
 {
-	"log": {
-		"disabled": false,
-		"level": "error",
-		"output": "./box.log",
-		"timestamp": true
-	},
-	"dns": {
-		"servers": [
-			{
-				"tag": "dns_proxy",
-				"address": "tls://8.8.4.4/dns-query",
-				"detour": "国外出站"
-			},
-			{
-				"tag": "dns_global",
-				"address": "tls://8.8.4.4/dns-query",
-				"detour": "全局代理"
-			},
-			{
-				"tag": "dns_direct",
-				"address": "tls://223.6.6.6/dns-query",
-				"detour": "国内出站"
-			},
-			{
-				"tag": "dns_local",
-				"address": "local",
-				"detour": "本机直连"
-			},
-			{
-				"tag": "dns_fake",
-				"address": "fakeip"
-			},
-			{
-				"tag": "ad",
-				"address": "rcode://success"
-			}
-		],
-		"rules": [
-			{
-				"outbound": "本机直连",
-				"server": "dns_local"
-			},
-			{
-				"outbound": "any",
-				"server": "dns_direct"
-			},
-			{
-				"clash_mode": "本机直连",
-				"server": "dns_local"
-			},
-			{
-				"clash_mode": "全局代理",
-				"server": "dns_global"
-			},
-			{
-				"rule_set": [
-					"Skip-https",
-					"Push"
-				],
-				"server": "dns_local"
-			},
-			{
-				"clash_mode": "规则模式",
-				"rule_set": "BanAD",
-				"server": "ad",
-				"rewrite_ttl": 0,
-				"disable_cache": true
-			},
-			{
-				"clash_mode": "规则模式",
-				"query_type": [
-					"A",
-					"AAAA"
-				],
-				"server": "dns_fake",
-				"rewrite_ttl": 0,
-				"disable_cache": true
-			},
-			{
-				"clash_mode": "规则模式",
-				"rule_set": [
-					"geosite-tiktok@!cn",
-					"Proxy-domain"
-				],
-				"server": "dns_proxy"
-			},
-			{
-				"clash_mode": "规则模式",
-				"rule_set": [
-					"geosite-cn",
-					"geosite-bytedance",
-					"geosite-apple@cn",
-					"geosite-microsoft@cn",
-					"geosite-category-games@cn",
-					"geosite-category-companies@cn"
-				],
-				"server": "dns_direct"
-			},
-			{
-				"clash_mode": "规则模式",
-				"rule_set": "Direct-domain",
-				"server": "dns_direct"
-			},
-			{
-				"clash_mode": "规则模式",
-				"rule_set": "geosite-geolocation-!cn",
-				"server": "dns_proxy"
-			}
-		],
-		"fakeip": {
-			"enabled": true,
-			"inet4_range": "28.0.0.0/8",
-			"inet6_range": "fc00::/18"
-		},
-		"final": "dns_proxy",
-		"strategy": "prefer_ipv4",
-		"reverse_mapping": true,
-		"independent_cache": true
-	},
-	"inbounds": [
-		{
-			"type": "tun",
-			"tag": "tun-in",
-			"address": [
-				"172.18.0.1/30",
-				"fdfe:dcba:9876::1/126"
-			],
-			"mtu": 9000,
-			"strict_route": true,
-			"auto_route": true,
-			"stack": "mixed",
-			"sniff": true
-		}
-	],
-	"outbounds": [
-		{
-			"type": "dns",
-			"tag": "dns"
-		},
-		{
-			"type": "direct",
-			"tag": "本机直连"
-		},
-		{
-			"type": "block",
-			"tag": "流量拦截"
-		},
-		{
-			"type": "selector",
-			"tag": "国外出站",
-			"outbounds": "",
-			"interrupt_exist_connections": true
-		},
-		{
-			"type": "selector",
-			"tag": "国内出站",
-			"outbounds": [
-				"本机直连"
-			],
-			"interrupt_exist_connections": true
-		},
-		{
-			"type": "selector",
-			"tag": "全局代理",
-			"outbounds": "",
-			"interrupt_exist_connections": true
-		}
-	],
-	"route": {
-		"rule_set": [
-			{
-				"type": "remote",
-				"tag": "geosite-geolocation-!cn",
-				"format": "binary",
-				"url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-geolocation-!cn.srs",
-				"download_detour": "国外出站"
-			},
-			{
-				"type": "remote",
-				"tag": "BanAD",
-				"format": "binary",
-				"url": "https://raw.githubusercontent.com/KaringX/karing-ruleset/sing/ACL4SSR/BanProgramAD.srs",
-				"download_detour": "国外出站"
-			},
-			{
-				"type": "remote",
-				"tag": "geosite-tiktok@!cn",
-				"format": "binary",
-				"url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-tiktok@!cn.srs",
-				"download_detour": "国外出站"
-			},
-			{
-				"type": "remote",
-				"tag": "geosite-bytedance",
-				"format": "binary",
-				"url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-bytedance.srs",
-				"download_detour": "国外出站"
-			},
-			{
-				"type": "remote",
-				"tag": "geosite-apple@cn",
-				"format": "binary",
-				"url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-apple@cn.srs",
-				"download_detour": "国外出站"
-			},
-			{
-				"type": "remote",
-				"tag": "geosite-microsoft@cn",
-				"format": "binary",
-				"url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-microsoft@cn.srs",
-				"download_detour": "国外出站"
-			},
-			{
-				"type": "remote",
-				"tag": "geosite-category-games@cn",
-				"format": "binary",
-				"url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-category-games@cn.srs",
-				"download_detour": "国外出站"
-			},
-			{
-				"type": "remote",
-				"tag": "geoip-cn",
-				"format": "binary",
-				"url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs",
-				"download_detour": "国外出站"
-			},
-			{
-				"type": "remote",
-				"tag": "geosite-cn",
-				"format": "binary",
-				"url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-cn.srs",
-				"download_detour": "国外出站"
-			},
-			{
-				"type": "remote",
-				"tag": "geosite-category-companies@cn",
-				"format": "binary",
-				"url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-category-companies@cn.srs",
-				"download_detour": "国外出站"
-			},
-			{
-				"type": "remote",
-				"tag": "Proxy-domain",
-				"url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Proxy-domain.json",
-				"format": "source",
-				"download_detour": "国外出站"
-			},
-			{
-				"type": "remote",
-				"tag": "Direct-domain",
-				"url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Direct-domain.json",
-				"format": "source",
-				"download_detour": "国外出站"
-			},
-			{
-				"type": "remote",
-				"tag": "Push",
-				"url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Push.json",
-				"format": "source",
-				"download_detour": "国外出站"
-			},
-			{
-				"type": "remote",
-				"tag": "Puship",
-				"url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Puship.json",
-				"format": "source",
-				"download_detour": "国外出站"
-			},
-			{
-				"type": "remote",
-				"tag": "Skip-https",
-				"url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Skip-https.json",
-				"format": "source",
-				"download_detour": "国外出站"
-			}
-		],
-		"rules": [
-			{
-				"type": "logical",
-				"mode": "or",
-				"rules": [
-					{
-						"protocol": "dns"
-					},
-					{
-						"port": 53
-					}
-				],
-				"outbound": "dns"
-			},
-			{
-				"clash_mode": "本机直连",
-				"outbound": "本机直连"
-			},
-			{
-				"clash_mode": "全局代理",
-				"outbound": "全局代理"
-			},
-			{
-				"clash_mode": "规则模式",
-				"port": 853,
-				"network": "tcp",
-				"outbound": "流量拦截"
-			},
-			{
-				"clash_mode": "规则模式",
-				"port": 443,
-				"network": "udp",
-				"outbound": "流量拦截"
-			},
-			{
-				"clash_mode": "规则模式",
-				"rule_set": [
-					"geosite-tiktok@!cn",
-					"Proxy-domain"
-				],
-				"outbound": "国外出站"
-			},
-			{
-				"rule_set": [
-					"Skip-https",
-					"Push"
-				],
-				"outbound": "本机直连"
-			},
-			{
-				"clash_mode": "规则模式",
-				"rule_set": [
-					"geosite-cn",
-					"geosite-bytedance",
-					"geosite-apple@cn",
-					"geosite-microsoft@cn",
-					"geosite-category-games@cn",
-					"geosite-category-companies@cn"
-				],
-				"outbound": "国内出站"
-			},
-			{
-				"clash_mode": "规则模式",
-				"rule_set": "Direct-domain",
-				"outbound": "国内出站"
-			},
-			{
-				"clash_mode": "规则模式",
-				"rule_set": "geosite-geolocation-!cn",
-				"outbound": "国外出站"
-			},
-			{
-				"clash_mode": "规则模式",
-				"rule_set": "Puship",
-				"outbound": "本机直连"
-			},
-			{
-				"clash_mode": "规则模式",
-				"rule_set": "geoip-cn",
-				"outbound": "国内出站"
-			},
-			{
-				"clash_mode": "规则模式",
-				"ip_cidr": [
-					"0.0.0.0/8",
-					"127.0.0.0/8",
-					"192.168.0.0/16",
-					"::/128",
-					"::1/128",
-					"fc70::/10",
-					"fe80::/10"
-				],
-				"outbound": "本机直连"
-			},
-			{
-				"clash_mode": "规则模式",
-				"ip_is_private": true,
-				"outbound": "本机直连"
-			},
-			{
-				"clash_mode": "规则模式",
-				"rule_set": "BanAD",
-				"outbound": "流量拦截"
-			}
-		],
-		"final": "国外出站",
-		"find_process": true,
-		"auto_detect_interface": true
-	},
-	"experimental": {
-		"cache_file": {
-			"enabled": true,
-			"path": "cache.db"
-		},
-		"clash_api": {
-			"external_controller": "127.0.0.1:9090",
-			"default_mode": "规则模式",
-			"external_ui_download_url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/dashboard.zip",
-			"external_ui_download_detour": "国外出站",
-			"external_ui": "ui"
-		}
-	}
+    "log": {
+        "disabled": false,
+        "level": "error",
+        "output": "./box.log",
+        "timestamp": true
+    },
+    "dns": {
+        "servers": [
+            {
+                "tag": "dns_proxy",
+                "address": "tls://8.8.4.4/dns-query",
+                "detour": "国外出站"
+            },
+            {
+                "tag": "dns_global",
+                "address": "tls://8.8.4.4/dns-query",
+                "detour": "全局代理"
+            },
+            {
+                "tag": "dns_direct",
+                "address": "tls://223.6.6.6/dns-query",
+                "detour": "国内出站"
+            },
+            {
+                "tag": "dns_local",
+                "address": "local",
+                "detour": "本机直连"
+            },
+            {
+                "tag": "dns_fake",
+                "address": "fakeip"
+            },
+            {
+                "tag": "ad",
+                "address": "rcode://success"
+            }
+        ],
+        "rules": [
+            {
+                "outbound": "本机直连",
+                "server": "dns_local"
+            },
+            {
+                "outbound": "any",
+                "server": "dns_direct"
+            },
+            {
+                "clash_mode": "本机直连",
+                "server": "dns_local"
+            },
+            {
+                "clash_mode": "全局代理",
+                "server": "dns_global"
+            },
+            {
+                "rule_set": [
+                    "Skip-https",
+                    "Push"
+                ],
+                "server": "dns_local"
+            },
+            {
+                "clash_mode": "规则模式",
+                "rule_set": "BanAD",
+                "server": "ad",
+                "rewrite_ttl": 0,
+                "disable_cache": true
+            },
+            {
+                "clash_mode": "规则模式",
+                "query_type": [
+                    "A",
+                    "AAAA"
+                ],
+                "server": "dns_fake",
+                "rewrite_ttl": 0,
+                "disable_cache": true
+            },
+            {
+                "clash_mode": "规则模式",
+                "rule_set": [
+                    "geosite-tiktok@!cn",
+                    "Proxy-domain"
+                ],
+                "server": "dns_proxy"
+            },
+            {
+                "clash_mode": "规则模式",
+                "rule_set": [
+                    "geosite-cn",
+                    "geosite-bytedance",
+                    "geosite-apple@cn",
+                    "geosite-microsoft@cn",
+                    "geosite-category-games@cn",
+                    "geosite-category-companies@cn"
+                ],
+                "server": "dns_direct"
+            },
+            {
+                "clash_mode": "规则模式",
+                "rule_set": "Direct-domain",
+                "server": "dns_direct"
+            },
+            {
+                "clash_mode": "规则模式",
+                "rule_set": "geosite-geolocation-!cn",
+                "server": "dns_proxy"
+            }
+        ],
+        "fakeip": {
+            "enabled": true,
+            "inet4_range": "28.0.0.0/8",
+            "inet6_range": "fc00::/18"
+        },
+        "final": "dns_proxy",
+        "strategy": "prefer_ipv4",
+        "reverse_mapping": true,
+        "independent_cache": true
+    },
+    "inbounds": [
+        {
+            "type": "tun",
+            "tag": "tun-in",
+            "address": [
+                "172.18.0.1/30",
+                "fdfe:dcba:9876::1/126"
+            ],
+            "mtu": 9000,
+            "strict_route": true,
+            "auto_route": true,
+            "stack": "mixed",
+            "sniff": true
+        }
+    ],
+    "outbounds": [
+        {
+            "type": "dns",
+            "tag": "dns"
+        },
+        {
+            "type": "direct",
+            "tag": "本机直连"
+        },
+        {
+            "type": "block",
+            "tag": "流量拦截"
+        },
+        {
+            "type": "selector",
+            "tag": "国外出站",
+            "outbounds": "",
+            "interrupt_exist_connections": true
+        },
+        {
+            "type": "selector",
+            "tag": "国内出站",
+            "outbounds": [
+                "本机直连"
+            ],
+            "interrupt_exist_connections": true
+        },
+        {
+            "type": "selector",
+            "tag": "全局代理",
+            "outbounds": "",
+            "interrupt_exist_connections": true
+        }
+    ],
+    "route": {
+        "rule_set": [
+            {
+                "type": "remote",
+                "tag": "geosite-geolocation-!cn",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-geolocation-!cn.srs",
+                "download_detour": "国外出站"
+            },
+            {
+                "type": "remote",
+                "tag": "BanAD",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/KaringX/karing-ruleset/sing/ACL4SSR/BanProgramAD.srs",
+                "download_detour": "国外出站"
+            },
+            {
+                "type": "remote",
+                "tag": "geosite-tiktok@!cn",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-tiktok@!cn.srs",
+                "download_detour": "国外出站"
+            },
+            {
+                "type": "remote",
+                "tag": "geosite-bytedance",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-bytedance.srs",
+                "download_detour": "国外出站"
+            },
+            {
+                "type": "remote",
+                "tag": "geosite-apple@cn",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-apple@cn.srs",
+                "download_detour": "国外出站"
+            },
+            {
+                "type": "remote",
+                "tag": "geosite-microsoft@cn",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-microsoft@cn.srs",
+                "download_detour": "国外出站"
+            },
+            {
+                "type": "remote",
+                "tag": "geosite-category-games@cn",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-category-games@cn.srs",
+                "download_detour": "国外出站"
+            },
+            {
+                "type": "remote",
+                "tag": "geoip-cn",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs",
+                "download_detour": "国外出站"
+            },
+            {
+                "type": "remote",
+                "tag": "geosite-cn",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-cn.srs",
+                "download_detour": "国外出站"
+            },
+            {
+                "type": "remote",
+                "tag": "geosite-category-companies@cn",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-category-companies@cn.srs",
+                "download_detour": "国外出站"
+            },
+            {
+                "type": "remote",
+                "tag": "Proxy-domain",
+                "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Proxy-domain.json",
+                "format": "source",
+                "download_detour": "国外出站"
+            },
+            {
+                "type": "remote",
+                "tag": "Direct-domain",
+                "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Direct-domain.json",
+                "format": "source",
+                "download_detour": "国外出站"
+            },
+            {
+                "type": "remote",
+                "tag": "Push",
+                "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Push.json",
+                "format": "source",
+                "download_detour": "国外出站"
+            },
+            {
+                "type": "remote",
+                "tag": "Puship",
+                "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Puship.json",
+                "format": "source",
+                "download_detour": "国外出站"
+            },
+            {
+                "type": "remote",
+                "tag": "Skip-https",
+                "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Skip-https.json",
+                "format": "source",
+                "download_detour": "国外出站"
+            }
+        ],
+        "rules": [
+            {
+                "type": "logical",
+                "mode": "or",
+                "rules": [
+                    {
+                        "protocol": "dns"
+                    },
+                    {
+                        "port": 53
+                    }
+                ],
+                "outbound": "dns"
+            },
+            {
+                "clash_mode": "本机直连",
+                "outbound": "本机直连"
+            },
+            {
+                "clash_mode": "全局代理",
+                "outbound": "全局代理"
+            },
+            {
+                "clash_mode": "规则模式",
+                "port": 853,
+                "network": "tcp",
+                "outbound": "流量拦截"
+            },
+            {
+                "clash_mode": "规则模式",
+                "port": 443,
+                "network": "udp",
+                "outbound": "流量拦截"
+            },
+            {
+                "clash_mode": "规则模式",
+                "rule_set": [
+                    "geosite-tiktok@!cn",
+                    "Proxy-domain"
+                ],
+                "outbound": "国外出站"
+            },
+            {
+                "rule_set": [
+                    "Skip-https",
+                    "Push"
+                ],
+                "outbound": "本机直连"
+            },
+            {
+                "clash_mode": "规则模式",
+                "rule_set": [
+                    "geosite-cn",
+                    "geosite-bytedance",
+                    "geosite-apple@cn",
+                    "geosite-microsoft@cn",
+                    "geosite-category-games@cn",
+                    "geosite-category-companies@cn"
+                ],
+                "outbound": "国内出站"
+            },
+            {
+                "clash_mode": "规则模式",
+                "rule_set": "Direct-domain",
+                "outbound": "国内出站"
+            },
+            {
+                "clash_mode": "规则模式",
+                "rule_set": "geosite-geolocation-!cn",
+                "outbound": "国外出站"
+            },
+            {
+                "clash_mode": "规则模式",
+                "rule_set": "Puship",
+                "outbound": "本机直连"
+            },
+            {
+                "clash_mode": "规则模式",
+                "rule_set": "geoip-cn",
+                "outbound": "国内出站"
+            },
+            {
+                "clash_mode": "规则模式",
+                "ip_cidr": [
+                    "0.0.0.0/8",
+                    "127.0.0.0/8",
+                    "192.168.0.0/16",
+                    "::/128",
+                    "::1/128",
+                    "fc70::/10",
+                    "fe80::/10"
+                ],
+                "outbound": "本机直连"
+            },
+            {
+                "clash_mode": "规则模式",
+                "ip_is_private": true,
+                "outbound": "本机直连"
+            },
+            {
+                "clash_mode": "规则模式",
+                "rule_set": "BanAD",
+                "outbound": "流量拦截"
+            }
+        ],
+        "final": "国外出站",
+        "find_process": true,
+        "auto_detect_interface": true
+    },
+    "experimental": {
+        "cache_file": {
+            "enabled": true,
+            "path": "cache.db"
+        },
+        "clash_api": {
+            "external_controller": "127.0.0.1:9090",
+            "default_mode": "规则模式",
+            "external_ui_download_url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/dashboard.zip",
+            "external_ui_download_detour": "国外出站",
+            "external_ui": "ui"
+        }
+    }
 }
