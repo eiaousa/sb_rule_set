@@ -1,0 +1,17 @@
+{
+    "version": 2,
+    "rules": [
+        {
+            "domain_keyword": [
+                "wx.qlogo",
+                "weixin",
+                "wechat",
+                "wxpay",
+                "wxmp",
+                "miniprogram",
+                "tencent",
+                "tenpay"
+            ]
+        }
+    ]
+}
