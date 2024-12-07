@@ -86,7 +86,10 @@
                 "server": "dns_local"
             },
             {
-                "rule_set": "Direct-domain",
+                "rule_set": [
+                    "Direct-domain",
+                    "Direct-wx"
+                ],
                 "server": "dns_direct"
             },
             {
@@ -224,7 +227,10 @@
                 "outbound": "🖥️本地直连"
             },
             {
-                "rule_set": "Direct-domain",
+                "rule_set": [
+                    "Direct-domain",
+                    "Direct-wx"
+                ],
                 "outbound": "🔵国内出站"
             },
             {
@@ -401,6 +407,13 @@
                 "type": "remote",
                 "tag": "Puship",
                 "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Puship.json",
+                "format": "source",
+                "download_detour": "🔴国外出站"
+            },
+            {
+                "type": "remote",
+                "tag": "Direct-wx",
+                "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Direct.json",
                 "format": "source",
                 "download_detour": "🔴国外出站"
             },
