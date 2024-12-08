@@ -20,17 +20,17 @@
                 "tag": "dns_proxy",
                 "address": "tls://8.8.4.4/dns-query",
                 "strategy": "ipv4_only",
-                "detour": "🔴国外出站"
+                "detour": "🧱•国外出站"
             },
             {
                 "tag": "dns_direct",
                 "address": "tls://223.6.6.6/dns-query",
-                "detour": "🔵国内出站"
+                "detour": "🇨🇳•国内出站"
             },
             {
                 "tag": "dns_local",
                 "address": "local",
-                "detour": "🖥️本地直连"
+                "detour": "🖥️•本地直连"
             },
             {
                 "tag": "dns_fake",
@@ -39,7 +39,7 @@
         ],
         "rules": [
             {
-                "outbound": "🖥️本地直连",
+                "outbound": "🖥️•本地直连",
                 "server": "dns_local"
             },
             {
@@ -94,7 +94,7 @@
             },
             {
                 "rule_set": [
-                    "geosite-tiktok@!cn",
+                    "tiktok@!cn",
                     "proxy",
                     "Proxy-domain"
                 ],
@@ -102,17 +102,17 @@
             },
             {
                 "rule_set": [
-                    "geosite-cn",
-                    "geosite-bytedance",
-                    "geosite-apple@cn",
-                    "geosite-microsoft@cn",
-                    "geosite-category-games@cn",
-                    "geosite-category-companies@cn"
+                    "cn",
+                    "bytedance",
+                    "apple@cn",
+                    "microsoft@cn",
+                    "category-games@cn",
+                    "category-companies@cn"
                 ],
                 "server": "dns_direct"
             },
             {
-                "rule_set": "geosite-geolocation-!cn",
+                "rule_set": "geolocation-!cn",
                 "server": "dns_proxy"
             }
         ],
@@ -139,52 +139,33 @@
     ],
     "outbounds": [
         {
-            "tag": "🔴国外出站",
+            "tag": "🧱•国外出站",
+            "type": "selector",
+            "outbounds": ""
+        },
+        {
+            "tag": "🇨🇳•国内出站",
             "type": "selector",
             "outbounds": [
-                "🔄国外自动"
+                "🖥️•本地直连"
             ]
-        },
-        {
-            "tag": "🔵国内出站",
-            "type": "selector",
-            "outbounds": [
-                "🖥️本地直连",
-                "🔄国内自动"
-            ]
-        },
-        {
-            "tag": "🔄国内自动",
-            "type": "urltest",
-            "outbounds": "",
-            "url": "https://connectivitycheck.platform.hicloud.com/generate_204",
-            "interval": "10m",
-            "tolerance": 50
-        },
-        {
-            "tag": "🔄国外自动",
-            "type": "urltest",
-            "outbounds": "",
-            "url": "http://www.gstatic.com/generate_204",
-            "interval": "10m",
-            "tolerance": 50
         },
         {
             "tag": "GLOBAL",
             "type": "selector",
             "outbounds": [
-                "🔴国外出站",
-                "🔵国内出站",
-                "🖥️本地直连"
+                "🧱•国外出站",
+                "🇨🇳•国内出站",
+                "🖥️•本地直连"
             ]
         },
         {
-            "tag": "🖥️本地直连",
+            "tag": "🖥️•本地直连",
             "type": "direct"
         }
     ],
     "route": {
-        "final": "🔴国外出站",
+        "final": "🧱•国外出站",
         "find_process": true,
         "auto_detect_interface": true,
         "rules": [
@@ -197,7 +178,7 @@
             },
             {
                 "clash_mode": "Direct",
-                "outbound": "🖥️本地直连"
+                "outbound": "🖥️•本地直连"
             },
             {
                 "clash_mode": "Global",
@@ -215,7 +196,13 @@
                         "port": 443
                     }
                 ],
-                "action": "reject"
+                "action": "reject",
+                "method": "drop"
+            },
+            {
+                "rule_set": "ads",
+                "action": "reject",
+                "method": "drop"
             },
             {
                 "rule_set": [
@@ -224,56 +211,57 @@
                     "private",
                     "Push"
                 ],
-                "outbound": "🖥️本地直连"
+                "outbound": "🖥️•本地直连"
             },
             {
                 "rule_set": [
                     "Direct-domain",
                     "Direct-wx"
                 ],
-                "outbound": "🔵国内出站"
+                "outbound": "🇨🇳•国内出站"
             },
             {
                 "rule_set": [
-                    "geosite-tiktok@!cn",
+                    "tiktok@!cn",
                     "proxy",
                     "Proxy-domain"
                 ],
-                "outbound": "🔴国外出站"
+                "outbound": "🧱•国外出站"
             },
             {
                 "rule_set": [
-                    "geosite-cn",
-                    "geosite-bytedance",
-                    "geosite-apple@cn",
-                    "geosite-microsoft@cn",
-                    "geosite-category-games@cn",
-                    "geosite-category-companies@cn"
+                    "cn",
+                    "bytedance",
+                    "apple@cn",
+                    "microsoft@cn",
+                    "category-games@cn",
+                    "category-companies@cn"
                 ],
-                "outbound": "🔵国内出站"
+                "outbound": "🇨🇳•国内出站"
             },
             {
-                "rule_set": "geosite-geolocation-!cn",
-                "outbound": "🔴国外出站"
+                "rule_set": "geolocation-!cn",
+                "outbound": "🧱•国外出站"
             },
             {
                 "rule_set": "telegramip",
-                "outbound": "🔴国外出站"
+                "outbound": "🧱•国外出站"
             },
             {
-                "rule_set": "geoip-cn",
-                "outbound": "🔵国内出站"
+                "rule_set": "cnip",
+                "outbound": "🇨🇳•国内出站"
             },
             {
-                "rule_set": [
-                    "privateip",
-                    "Puship"
-                ],
-                "outbound": "🖥️本地直连"
+                "rule_set": "Puship",
+                "outbound": "🖥️•本地直连"
+            },
+            {
+                "rule_set": "privateip",
+                "outbound": "🖥️•本地直连"
             },
             {
                 "ip_is_private": true,
-                "outbound": "🖥️本地直连"
+                "outbound": "🖥️•本地直连"
             }
         ],
         "rule_set": [
@@ -281,148 +269,155 @@
                 "type": "remote",
                 "tag": "proxy",
                 "format": "binary",
-                "url": "https://github.com/lateautumn2/ruleset_geodata/raw/refs/heads/sing-box-ruleset/proxy.srs",
-                "download_detour": "🔴国外出站"
+                "url": "https://raw.githubusercontent.com/lateautumn2/ruleset_geodata/refs/heads/sing-box-ruleset/proxy.srs",
+                "download_detour": "🧱•国外出站"
+            },
+            {
+                "type": "remote",
+                "tag": "ads",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/Yuu518/sing-box-rules/rule_set/rule_set_site/category-ads-all.srs",
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
                 "tag": "telegramip",
                 "format": "binary",
-                "url": "https://github.com/lateautumn2/ruleset_geodata/raw/refs/heads/sing-box-ruleset/telegramip.srs",
-                "download_detour": "🔴国外出站"
+                "url": "https://raw.githubusercontent.com/lateautumn2/ruleset_geodata/refs/heads/sing-box-ruleset/telegramip.srs",
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
-                "tag": "geosite-geolocation-!cn",
+                "tag": "geolocation-!cn",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-geolocation-!cn.srs",
-                "download_detour": "🔴国外出站"
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
                 "tag": "fakeip-filter",
                 "format": "binary",
-                "url": "https://github.com/lateautumn2/ruleset_geodata/raw/refs/heads/sing-box-ruleset/fakeip-filter.srs",
-                "download_detour": "🔴国外出站"
+                "url": "https://raw.githubusercontent.com/lateautumn2/ruleset_geodata/refs/heads/sing-box-ruleset/fakeip-filter.srs",
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
                 "tag": "private",
                 "format": "binary",
-                "url": "https://github.com/lateautumn2/ruleset_geodata/raw/refs/heads/sing-box-ruleset/private.srs",
-                "download_detour": "🔴国外出站"
+                "url": "https://raw.githubusercontent.com/lateautumn2/ruleset_geodata/refs/heads/sing-box-ruleset/private.srs",
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
                 "tag": "privateip",
                 "format": "binary",
-                "url": "https://github.com/lateautumn2/ruleset_geodata/raw/refs/heads/sing-box-ruleset/privateip.srs",
-                "download_detour": "🔴国外出站"
+                "url": "https://raw.githubusercontent.com/lateautumn2/ruleset_geodata/refs/heads/sing-box-ruleset/privateip.srs",
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
-                "tag": "geosite-tiktok@!cn",
+                "tag": "tiktok@!cn",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-tiktok@!cn.srs",
-                "download_detour": "🔴国外出站"
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
-                "tag": "geosite-bytedance",
+                "tag": "bytedance",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-bytedance.srs",
-                "download_detour": "🔴国外出站"
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
-                "tag": "geosite-apple@cn",
+                "tag": "apple@cn",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-apple@cn.srs",
-                "download_detour": "🔴国外出站"
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
-                "tag": "geosite-microsoft@cn",
+                "tag": "microsoft@cn",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-microsoft@cn.srs",
-                "download_detour": "🔴国外出站"
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
-                "tag": "geosite-category-games@cn",
+                "tag": "category-games@cn",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-category-games@cn.srs",
-                "download_detour": "🔴国外出站"
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
-                "tag": "geoip-cn",
+                "tag": "cnip",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs",
-                "download_detour": "🔴国外出站"
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
-                "tag": "geosite-cn",
+                "tag": "cn",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-cn.srs",
-                "download_detour": "🔴国外出站"
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
-                "tag": "geosite-category-companies@cn",
+                "tag": "category-companies@cn",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-category-companies@cn.srs",
-                "download_detour": "🔴国外出站"
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
                 "tag": "httpdns",
                 "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/httpdns.srs",
                 "format": "binary",
-                "download_detour": "🔴国外出站"
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
                 "tag": "Proxy-domain",
                 "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Proxy-domain.json",
                 "format": "source",
-                "download_detour": "🔴国外出站"
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
                 "tag": "Direct-domain",
                 "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Direct-domain.json",
                 "format": "source",
-                "download_detour": "🔴国外出站"
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
                 "tag": "Push",
                 "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Push.json",
                 "format": "source",
-                "download_detour": "🔴国外出站"
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
                 "tag": "Puship",
                 "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Puship.json",
                 "format": "source",
-                "download_detour": "🔴国外出站"
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
                 "tag": "Direct-wx",
                 "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Direct.json",
                 "format": "source",
-                "download_detour": "🔴国外出站"
+                "download_detour": "🧱•国外出站"
             },
             {
                 "type": "remote",
                 "tag": "Skip-https",
                 "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Skip-https.json",
                 "format": "source",
-                "download_detour": "🔴国外出站"
+                "download_detour": "🧱•国外出站"
             }
         ]
     }
