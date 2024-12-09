@@ -7,13 +7,12 @@
     },
     "experimental": {
         "clash_api": {
-            "external_controller": "0.0.0.0:57777",
-            "external_ui_download_url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/dashboard.zip",
+            "external_controller": "0.0.0.0:9090",
             "external_ui": "ui",
             "secret": "VkUKYPrxUWiZRV62Lg7oc0WOX2yaENYl",
             "access_control_allow_origin": [
                 "http://0.0.0.0",
-                "http://yacd.883875.xyz"
+                "http://yacd.haishan.me"
             ],
             "access_control_allow_private_network": true
         },
