@@ -12,13 +12,11 @@
                 ".io",
                 ".dev"
             ],
-            "domain": [
-                "anyway.fm",
-                "imarkr.com"
-            ],
             "domain_keyword": [
                 "us.",
                 ".us",
+                "anyway.",
+                "imarkr.",
                 ".org",
                 "vhdns"
             ]
