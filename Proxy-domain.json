@@ -9,9 +9,12 @@
                 ".appinn.com",
                 ".t-mobile.com",
                 ".3gppnetwork.org",
-                ".imarkr.com",
                 ".io",
                 ".dev"
+            ],
+            "domain": [
+                "anyway.fm",
+                "imarkr.com"
             ],
             "domain_keyword": [
                 "us.",
