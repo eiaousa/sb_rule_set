@@ -56,10 +56,10 @@
                 "rules": [
                     {
                         "rule_set": [
-                            "Skip-https",
                             "Push",
-                            "httpdns",
                             "private",
+                            "httpdns",
+                            "Skip-https",
                             "fakeip-filter",
                             "Direct-domain"
                         ],
