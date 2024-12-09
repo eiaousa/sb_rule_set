@@ -3,7 +3,9 @@
     "rules": [
         {
             "domain": [
-                "dlg.io.mi.com"
+                "dlg.io.mi.com",
+                "yacd.metacubex.one",
+                "yacd.haishan.me"
             ],
             "domain_keyword": [
                 "stun",
@@ -26,6 +28,7 @@
                 ".i.tplinknbu.com",
                 "wap-gw.tplinkcloud.com",
                 "stun.tplinkcloud.com",
+                ".ipw.cn",
                 ".feishu.cn"
             ]
         }
