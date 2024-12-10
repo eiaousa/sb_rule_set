@@ -8,17 +8,10 @@
     "experimental": {
         "clash_api": {
             "external_controller": "0.0.0.0:9090",
-            "external_ui": "ui",
-            "secret": "VkUKYPrxUWiZRV62Lg7oc0WOX2yaENYl",
-            "access_control_allow_origin": [
-                "http://0.0.0.0",
-                "http://yacd.haishan.me"
-            ],
-            "access_control_allow_private_network": true
+            "external_ui": "ui"
         },
         "cache_file": {
-            "enabled": true,
-            "path": "cache.db"
+            "enabled": true
         }
     },
     "dns": {
@@ -62,13 +55,15 @@
                 "mode": "and",
                 "rules": [
                     {
+                        "domain": [
+                            "hb.883875.xyz",
+                            "ipv63.883875.xyz"
+                        ],
                         "rule_set": [
                             "Push",
                             "private",
                             "httpdns",
-                            "Skip-https",
-                            "fakeip-filter",
-                            "Direct-domain"
+                            "fakeip-filter"
                         ],
                         "invert": true
                     },
@@ -85,7 +80,6 @@
             },
             {
                 "rule_set": [
-                    "Skip-https",
                     "httpdns",
                     "private",
                     "Push"
@@ -93,31 +87,36 @@
                 "server": "dns_local"
             },
             {
-                "rule_set": "Direct-domain",
-                "server": "dns_direct"
-            },
-            {
                 "rule_set": [
-                    "tiktok@!cn",
-                    "proxy",
-                    "Proxy-domain"
+                    "proxy"
+                ],
+                "domain_suffix": [
+                    ".xn--ngstr-lra8j.com",
+                    ".googleapis.cn",
+                    ".idcoffer.com",
+                    ".appinn.com",
+                    ".t-mobile.com",
+                    ".3gppnetwork.org",
+                    ".io",
+                    ".dev"
+                ],
+                "domain_keyword": [
+                    "us.",
+                    ".us",
+                    "anyway.",
+                    "imarkr.",
+                    ".org",
+                    "vhdns"
                 ],
                 "server": "dns_proxy"
             },
             {
-                "rule_set": [
-                    "cn",
-                    "bytedance",
-                    "apple@cn",
-                    "microsoft@cn",
-                    "category-games@cn",
-                    "category-companies@cn"
+                "rule_set": "cn",
+                "domain": [
+                    "hb.883875.xyz",
+                    "ipv63.883875.xyz"
                 ],
                 "server": "dns_direct"
-            },
-            {
-                "rule_set": "geolocation-!cn",
-                "server": "dns_proxy"
             }
         ],
         "fakeip": {
@@ -210,7 +209,6 @@
             },
             {
                 "rule_set": [
-                    "Skip-https",
                     "httpdns",
                     "private",
                     "Push"
@@ -218,31 +216,36 @@
                 "outbound": "🖥️•本地直连"
             },
             {
-                "rule_set": "Direct-domain",
-                "outbound": "🇨🇳•国内出站"
-            },
-            {
                 "rule_set": [
-                    "tiktok@!cn",
-                    "proxy",
-                    "Proxy-domain"
+                    "proxy"
+                ],
+                "domain_suffix": [
+                    ".xn--ngstr-lra8j.com",
+                    ".googleapis.cn",
+                    ".idcoffer.com",
+                    ".appinn.com",
+                    ".t-mobile.com",
+                    ".3gppnetwork.org",
+                    ".io",
+                    ".dev"
+                ],
+                "domain_keyword": [
+                    "us.",
+                    ".us",
+                    "anyway.",
+                    "imarkr.",
+                    ".org",
+                    "vhdns"
                 ],
                 "outbound": "🧱•国外出站"
             },
             {
-                "rule_set": [
-                    "cn",
-                    "bytedance",
-                    "apple@cn",
-                    "microsoft@cn",
-                    "category-games@cn",
-                    "category-companies@cn"
+                "rule_set": "cn",
+                "domain": [
+                    "hb.883875.xyz",
+                    "ipv63.883875.xyz"
                 ],
                 "outbound": "🇨🇳•国内出站"
-            },
-            {
-                "rule_set": "geolocation-!cn",
-                "outbound": "🧱•国外出站"
             },
             {
                 "rule_set": "telegramip",
@@ -267,11 +270,11 @@
         ],
         "rule_set": [
             {
-                "type": "remote",
                 "tag": "proxy",
+                "type": "remote",
                 "format": "binary",
                 "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/lateautumn2/ruleset_geodata/refs/heads/sing-box-ruleset/proxy.srs"
+                "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/proxy.srs"
             },
             {
                 "type": "remote",
@@ -281,117 +284,53 @@
                 "url": "https://raw.githubusercontent.com/Yuu518/sing-box-rules/rule_set/rule_set_site/category-ads-all.srs"
             },
             {
-                "type": "remote",
                 "tag": "telegramip",
+                "type": "remote",
                 "format": "binary",
                 "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/lateautumn2/ruleset_geodata/refs/heads/sing-box-ruleset/telegramip.srs"
+                "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/telegramip.srs"
             },
             {
-                "type": "remote",
-                "tag": "geolocation-!cn",
-                "format": "binary",
-                "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-geolocation-!cn.srs"
-            },
-            {
-                "type": "remote",
                 "tag": "fakeip-filter",
+                "type": "remote",
                 "format": "binary",
                 "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/lateautumn2/ruleset_geodata/refs/heads/sing-box-ruleset/fakeip-filter.srs"
+                "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/fakeip-filter.srs"
             },
             {
-                "type": "remote",
                 "tag": "private",
+                "type": "remote",
                 "format": "binary",
                 "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/lateautumn2/ruleset_geodata/refs/heads/sing-box-ruleset/private.srs"
+                "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/private.srs"
             },
             {
-                "type": "remote",
                 "tag": "privateip",
+                "type": "remote",
                 "format": "binary",
                 "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/lateautumn2/ruleset_geodata/refs/heads/sing-box-ruleset/privateip.srs"
+                "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/privateip.srs"
             },
             {
-                "type": "remote",
-                "tag": "tiktok@!cn",
-                "format": "binary",
-                "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-tiktok@!cn.srs"
-            },
-            {
-                "type": "remote",
-                "tag": "bytedance",
-                "format": "binary",
-                "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-bytedance.srs"
-            },
-            {
-                "type": "remote",
-                "tag": "apple@cn",
-                "format": "binary",
-                "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-apple@cn.srs"
-            },
-            {
-                "type": "remote",
-                "tag": "microsoft@cn",
-                "format": "binary",
-                "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-microsoft@cn.srs"
-            },
-            {
-                "type": "remote",
-                "tag": "category-games@cn",
-                "format": "binary",
-                "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-category-games@cn.srs"
-            },
-            {
-                "type": "remote",
                 "tag": "cnip",
+                "type": "remote",
                 "format": "binary",
                 "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs"
+                "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/cnip.srs"
             },
             {
-                "type": "remote",
                 "tag": "cn",
-                "format": "binary",
-                "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-cn.srs"
-            },
-            {
                 "type": "remote",
-                "tag": "category-companies@cn",
                 "format": "binary",
                 "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/CHIZI-0618/v2ray-rules-dat/release/singbox_rule_set/geosite-category-companies@cn.srs"
+                "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/cn.srs"
             },
             {
                 "type": "remote",
                 "tag": "httpdns",
                 "format": "binary",
                 "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/httpdns.srs"
-            },
-            {
-                "type": "remote",
-                "tag": "Proxy-domain",
-                "format": "source",
-                "update_interval": "1h",
-                "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Proxy-domain.json"
-            },
-            {
-                "type": "remote",
-                "tag": "Direct-domain",
-                "format": "source",
-                "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Direct-domain.json"
+                "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/sing/geo/geosite/httpdns.srs"
             },
             {
                 "type": "remote",
@@ -406,13 +345,6 @@
                 "format": "source",
                 "download_detour": "🧱•国外出站",
                 "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Puship.json"
-            },
-            {
-                "type": "remote",
-                "tag": "Skip-https",
-                "format": "source",
-                "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Skip-https.json"
             }
         ]
     }
