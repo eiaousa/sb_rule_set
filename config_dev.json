@@ -55,9 +55,8 @@
                 "mode": "and",
                 "rules": [
                     {
-                        "domain": [
-                            "hb.883875.xyz",
-                            "ipv63.883875.xyz"
+                        "domain_regex": [
+                            "^(hb|ipv63)\\.883875\\.xyz$"
                         ],
                         "rule_set": [
                             "Push",
@@ -90,31 +89,28 @@
                 "rule_set": [
                     "proxy"
                 ],
-                "domain_suffix": [
-                    ".xn--ngstr-lra8j.com",
-                    ".googleapis.cn",
-                    ".idcoffer.com",
-                    ".appinn.com",
-                    ".t-mobile.com",
-                    ".3gppnetwork.org",
-                    ".io",
-                    ".dev"
-                ],
-                "domain_keyword": [
-                    "us.",
-                    ".us",
-                    "anyway.",
-                    "imarkr.",
-                    ".org",
-                    "vhdns"
+                "domain_regex": [
+                    ".*\\.xn--ngstr-lra8j\\.com",
+                    ".*\\.googleapis\\.cn",
+                    ".*\\.idcoffer\\.com",
+                    ".*\\.appinn\\.com",
+                    ".*\\.t-mobile\\.com",
+                    ".*\\.3gppnetwork\\.org",
+                    ".*\\.io",
+                    ".*\\.dev",
+                    "^us\\..*",
+                    ".*\\.us$",
+                    ".*\\.anyway\\.",
+                    ".*\\.imarkr\\.",
+                    ".*\\.org",
+                    ".*\\.vhdns"
                 ],
                 "server": "dns_proxy"
             },
             {
                 "rule_set": "cn",
-                "domain": [
-                    "hb.883875.xyz",
-                    "ipv63.883875.xyz"
+                "domain_regex": [
+                    "^(hb|ipv63)\\.883875\\.xyz$"
                 ],
                 "server": "dns_direct"
             }
@@ -219,31 +215,28 @@
                 "rule_set": [
                     "proxy"
                 ],
-                "domain_suffix": [
-                    ".xn--ngstr-lra8j.com",
-                    ".googleapis.cn",
-                    ".idcoffer.com",
-                    ".appinn.com",
-                    ".t-mobile.com",
-                    ".3gppnetwork.org",
-                    ".io",
-                    ".dev"
-                ],
-                "domain_keyword": [
-                    "us.",
-                    ".us",
-                    "anyway.",
-                    "imarkr.",
-                    ".org",
-                    "vhdns"
+                "domain_regex": [
+                    ".*\\.xn--ngstr-lra8j\\.com",
+                    ".*\\.googleapis\\.cn",
+                    ".*\\.idcoffer\\.com",
+                    ".*\\.appinn\\.com",
+                    ".*\\.t-mobile\\.com",
+                    ".*\\.3gppnetwork\\.org",
+                    ".*\\.io",
+                    ".*\\.dev",
+                    "^us\\..*",
+                    ".*\\.us$",
+                    ".*\\.anyway\\.",
+                    ".*\\.imarkr\\.",
+                    ".*\\.org",
+                    ".*\\.vhdns"
                 ],
                 "outbound": "🧱•国外出站"
             },
             {
                 "rule_set": "cn",
-                "domain": [
-                    "hb.883875.xyz",
-                    "ipv63.883875.xyz"
+                "domain_regex": [
+                    "^(hb|ipv63)\\.883875\\.xyz$"
                 ],
                 "outbound": "🇨🇳•国内出站"
             },
