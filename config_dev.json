@@ -319,6 +319,27 @@
                 "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/cn.srs"
             },
             {
+                "tag": "microsoft-cn",
+                "type": "remote",
+                "format": "binary",
+                "download_detour": "🧱•国外出站",
+                "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/microsoft-cn.srs"
+            },
+            {
+                "tag": "apple-cn",
+                "type": "remote",
+                "format": "binary",
+                "download_detour": "🧱•国外出站",
+                "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/apple-cn.srs"
+            },
+            {
+                "tag": "games-cn",
+                "type": "remote",
+                "format": "binary",
+                "download_detour": "🧱•国外出站",
+                "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/games-cn.srs"
+            },
+            {
                 "type": "remote",
                 "tag": "httpdns",
                 "format": "binary",
