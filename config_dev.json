@@ -8,7 +8,9 @@
     "experimental": {
         "clash_api": {
             "external_controller": "0.0.0.0:9090",
-            "external_ui": "ui"
+            "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
+            "external_ui_download_detour": "‹‹国外››",
+            "external_ui": "xd"
         },
         "cache_file": {
             "enabled": true
@@ -18,19 +20,19 @@
         "servers": [
             {
                 "tag": "dns_proxy",
-                "address": "tls://8.8.4.4/dns-query",
+                "address": "tls://8.8.4.4",
                 "strategy": "ipv4_only",
-                "detour": "🧱•国外出站"
+                "detour": "‹‹国外››"
             },
             {
                 "tag": "dns_direct",
-                "address": "tls://223.6.6.6/dns-query",
-                "detour": "🇨🇳•国内出站"
+                "address": "tls://223.6.6.6",
+                "detour": "‹‹国内››"
             },
             {
                 "tag": "dns_local",
                 "address": "local",
-                "detour": "🖥️•本地直连"
+                "detour": "‹‹本地››"
             },
             {
                 "tag": "dns_fake",
@@ -39,7 +41,7 @@
         ],
         "rules": [
             {
-                "outbound": "🖥️•本地直连",
+                "outbound": "‹‹本地››",
                 "server": "dns_local"
             },
             {
@@ -55,14 +57,12 @@
                 "mode": "and",
                 "rules": [
                     {
-                        "domain_regex": [
-                            "^(hb|ipv63)\\.883875\\.xyz$"
-                        ],
                         "rule_set": [
-                            "Push",
-                            "private",
-                            "httpdns",
-                            "fakeip-filter"
+                            "inline_my",
+                            "inline_push",
+                            "remote_private",
+                            "remote_httpdns",
+                            "remote_fakeip_filter"
                         ],
                         "invert": true
                     },
@@ -79,38 +79,27 @@
             },
             {
                 "rule_set": [
-                    "httpdns",
-                    "private",
-                    "Push"
+                    "remote_proxy",
+                    "inline_proxy"
+                ],
+                "server": "dns_proxy"
+            },
+            {
+                "rule_set": [
+                    "inline_push",
+                    "remote_private",
+                    "remote_httpdns"
                 ],
                 "server": "dns_local"
             },
             {
                 "rule_set": [
-                    "proxy"
-                ],
-                "domain_regex": [
-                    ".*\\.xn--ngstr-lra8j\\.com",
-                    ".*\\.googleapis\\.cn",
-                    ".*\\.idcoffer\\.com",
-                    ".*\\.appinn\\.com",
-                    ".*\\.t-mobile\\.com",
-                    ".*\\.3gppnetwork\\.org",
-                    ".*\\.io",
-                    ".*\\.dev",
-                    "^us\\..*",
-                    ".*\\.us$",
-                    ".*\\.anyway\\.",
-                    ".*\\.imarkr\\.",
-                    ".*\\.org",
-                    ".*\\.vhdns"
-                ],
-                "server": "dns_proxy"
-            },
-            {
-                "rule_set": "cn",
-                "domain_regex": [
-                    "^(hb|ipv63)\\.883875\\.xyz$"
+                    "inline_my",
+                    "remote_cn",
+                    "inline_direct",
+                    "remote_apple_cn",
+                    "remote_games_cn",
+                    "remote_microsoft_cn"
                 ],
                 "server": "dns_direct"
             }
@@ -130,7 +119,7 @@
                 "172.18.0.1/30",
                 "fdfe:dcba:9876::1/126"
             ],
-            "mtu": 9000,
+            "mtu": 1492,
             "strict_route": true,
             "auto_route": true,
             "stack": "system"
@@ -138,33 +127,33 @@
     ],
     "outbounds": [
         {
-            "tag": "🧱•国外出站",
+            "tag": "‹‹国外››",
             "type": "selector",
             "outbounds": ""
         },
         {
-            "tag": "🇨🇳•国内出站",
+            "tag": "‹‹国内››",
             "type": "selector",
             "outbounds": [
-                "🖥️•本地直连"
+                "‹‹本地››"
             ]
         },
         {
             "tag": "GLOBAL",
             "type": "selector",
             "outbounds": [
-                "🧱•国外出站",
-                "🇨🇳•国内出站",
-                "🖥️•本地直连"
+                "‹‹国外››",
+                "‹‹国内››",
+                "‹‹本地››"
             ]
         },
         {
-            "tag": "🖥️•本地直连",
+            "tag": "‹‹本地››",
             "type": "direct"
         }
     ],
     "route": {
-        "final": "🧱•国外出站",
+        "final": "‹‹国外››",
         "find_process": true,
         "auto_detect_interface": true,
         "rules": [
@@ -172,12 +161,21 @@
                 "action": "sniff"
             },
             {
-                "protocol": "dns",
+                "type": "logical",
+                "mode": "or",
+                "rules": [
+                    {
+                        "protocol": "dns"
+                    },
+                    {
+                        "port": 53
+                    }
+                ],
                 "action": "hijack-dns"
             },
             {
                 "clash_mode": "Direct",
-                "outbound": "🖥️•本地直连"
+                "outbound": "‹‹本地››"
             },
             {
                 "clash_mode": "Global",
@@ -188,6 +186,7 @@
                 "mode": "or",
                 "rules": [
                     {
+                        "network": "tcp",
                         "port": 853
                     },
                     {
@@ -199,166 +198,210 @@
                 "method": "drop"
             },
             {
-                "rule_set": "ads",
+                "rule_set": "remote_ads",
                 "action": "reject",
                 "method": "drop"
             },
             {
                 "rule_set": [
-                    "httpdns",
-                    "private",
-                    "Push"
+                    "inline_push",
+                    "remote_private",
+                    "remote_httpdns"
                 ],
-                "outbound": "🖥️•本地直连"
+                "outbound": "‹‹本地››"
             },
             {
                 "rule_set": [
-                    "proxy"
+                    "remote_proxy",
+                    "inline_proxy"
                 ],
-                "domain_regex": [
-                    ".*\\.xn--ngstr-lra8j\\.com",
-                    ".*\\.googleapis\\.cn",
-                    ".*\\.idcoffer\\.com",
-                    ".*\\.appinn\\.com",
-                    ".*\\.t-mobile\\.com",
-                    ".*\\.3gppnetwork\\.org",
-                    ".*\\.io",
-                    ".*\\.dev",
-                    "^us\\..*",
-                    ".*\\.us$",
-                    ".*\\.anyway\\.",
-                    ".*\\.imarkr\\.",
-                    ".*\\.org",
-                    ".*\\.vhdns"
+                "outbound": "‹‹国外››"
+            },
+            {
+                "rule_set": [
+                    "inline_my",
+                    "remote_cn",
+                    "inline_direct",
+                    "remote_apple_cn",
+                    "remote_games_cn",
+                    "remote_microsoft_cn"
                 ],
-                "outbound": "🧱•国外出站"
+                "outbound": "‹‹国内››"
             },
             {
-                "rule_set": "cn",
-                "domain_regex": [
-                    "^(hb|ipv63)\\.883875\\.xyz$"
-                ],
-                "outbound": "🇨🇳•国内出站"
+                "rule_set": "remote_telegramip",
+                "outbound": "‹‹国外››"
             },
             {
-                "rule_set": "telegramip",
-                "outbound": "🧱•国外出站"
+                "rule_set": "remote_cnip",
+                "outbound": "‹‹国内››"
             },
             {
-                "rule_set": "cnip",
-                "outbound": "🇨🇳•国内出站"
-            },
-            {
-                "rule_set": "Puship",
-                "outbound": "🖥️•本地直连"
-            },
-            {
-                "rule_set": "privateip",
-                "outbound": "🖥️•本地直连"
+                "rule_set": "remote_privateip",
+                "outbound": "‹‹本地››"
             },
             {
                 "ip_is_private": true,
-                "outbound": "🖥️•本地直连"
+                "outbound": "‹‹本地››"
             }
         ],
         "rule_set": [
             {
-                "tag": "proxy",
+                "tag": "inline_my",
+                "type": "inline",
+                "rules": [
+                    {
+                        "domain_regex": [
+                            "^(hb|ipv63)\\.883875\\.xyz$"
+                        ]
+                    }
+                ]
+            },
+            {
+                "tag": "inline_push",
+                "type": "inline",
+                "rules": [
+                    {
+                        "domain_suffix": [
+                            ".push.apple.com",
+                            ".ultramobile.com"
+                        ],
+                        "domain_regex": "^(alt[1-8]-)?mtalk4?(-(staging|dev))?\\.google\\.com$",
+                        "ip_cidr": [
+                            "17.249.0.0/16",
+                            "17.252.0.0/16",
+                            "17.57.114.0/22",
+                            "17.118.128.0/18",
+                            "17.118.20.0/23",
+                            "2620:149:a44::/48",
+                            "2403:300:a42::/48",
+                            "2403:300:a51::/48",
+                            "2a01:b740:a42::/48"
+                        ]
+                    }
+                ]
+            },
+            {
+                "tag": "inline_direct",
+                "type": "inline",
+                "rules": [
+                    {
+                        "domain_keyword": [
+                            "wxpay",
+                            "tenpay"
+                        ]
+                    }
+                ]
+            },
+            {
+                "tag": "inline_proxy",
+                "type": "inline",
+                "rules": [
+                    {
+                        "domain_suffix": [
+                            ".xn--ngstr-lra8j.com",
+                            ".googleapis.cn",
+                            ".dev",
+                            ".io",
+                            ".us",
+                            ".org",
+                            ".idcoffer.com",
+                            ".appinn.com",
+                            ".t-mobile.com",
+                            ".3gppnetwork.org"
+                        ],
+                        "domain_keyword": [
+                            ".anyway.",
+                            "us.",
+                            ".imarkr.",
+                            ".vhdns"
+                        ]
+                    }
+                ]
+            },
+            {
+                "tag": "remote_proxy",
                 "type": "remote",
                 "format": "binary",
-                "download_detour": "🧱•国外出站",
+                "download_detour": "‹‹国外››",
                 "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/proxy.srs"
             },
             {
                 "type": "remote",
-                "tag": "ads",
+                "tag": "remote_ads",
                 "format": "binary",
-                "download_detour": "🧱•国外出站",
+                "download_detour": "‹‹国外››",
                 "url": "https://raw.githubusercontent.com/Yuu518/sing-box-rules/rule_set/rule_set_site/category-ads-all.srs"
             },
             {
-                "tag": "telegramip",
+                "tag": "remote_telegramip",
                 "type": "remote",
                 "format": "binary",
-                "download_detour": "🧱•国外出站",
+                "download_detour": "‹‹国外››",
                 "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/telegramip.srs"
             },
             {
-                "tag": "fakeip-filter",
+                "tag": "remote_fakeip_filter",
                 "type": "remote",
                 "format": "binary",
-                "download_detour": "🧱•国外出站",
+                "download_detour": "‹‹国外››",
                 "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/fakeip-filter.srs"
             },
             {
-                "tag": "private",
+                "tag": "remote_private",
                 "type": "remote",
                 "format": "binary",
-                "download_detour": "🧱•国外出站",
+                "download_detour": "‹‹国外››",
                 "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/private.srs"
             },
             {
-                "tag": "privateip",
+                "tag": "remote_privateip",
                 "type": "remote",
                 "format": "binary",
-                "download_detour": "🧱•国外出站",
+                "download_detour": "‹‹国外››",
                 "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/privateip.srs"
             },
             {
-                "tag": "cnip",
+                "tag": "remote_cnip",
                 "type": "remote",
                 "format": "binary",
-                "download_detour": "🧱•国外出站",
+                "download_detour": "‹‹国外››",
                 "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/cnip.srs"
             },
             {
-                "tag": "cn",
+                "tag": "remote_cn",
                 "type": "remote",
                 "format": "binary",
-                "download_detour": "🧱•国外出站",
+                "download_detour": "‹‹国外››",
                 "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/cn.srs"
             },
             {
-                "tag": "microsoft-cn",
+                "tag": "remote_microsoft_cn",
                 "type": "remote",
                 "format": "binary",
-                "download_detour": "🧱•国外出站",
+                "download_detour": "‹‹国外››",
                 "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/microsoft-cn.srs"
             },
             {
-                "tag": "apple-cn",
+                "tag": "remote_apple_cn",
                 "type": "remote",
                 "format": "binary",
-                "download_detour": "🧱•国外出站",
+                "download_detour": "‹‹国外››",
                 "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/apple-cn.srs"
             },
             {
-                "tag": "games-cn",
+                "tag": "remote_games_cn",
                 "type": "remote",
                 "format": "binary",
-                "download_detour": "🧱•国外出站",
+                "download_detour": "‹‹国外››",
                 "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/games-cn.srs"
             },
             {
                 "type": "remote",
-                "tag": "httpdns",
+                "tag": "remote_httpdns",
                 "format": "binary",
-                "download_detour": "🧱•国外出站",
+                "download_detour": "‹‹国外››",
                 "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/sing/geo/geosite/httpdns.srs"
-            },
-            {
-                "type": "remote",
-                "tag": "Push",
-                "format": "source",
-                "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Push.json"
-            },
-            {
-                "type": "remote",
-                "tag": "Puship",
-                "format": "source",
-                "download_detour": "🧱•国外出站",
-                "url": "https://raw.githubusercontent.com/eiaousa/sb_rule_set/refs/heads/main/Puship.json"
             }
         ]
     }
