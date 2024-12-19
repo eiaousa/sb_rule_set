@@ -20,13 +20,14 @@
         "servers": [
             {
                 "tag": "dns_proxy",
-                "address": "tls://8.8.4.4",
+                "address": "8.8.4.4",
                 "strategy": "ipv4_only",
                 "detour": "‹‹国外››"
             },
             {
                 "tag": "dns_direct",
-                "address": "tls://223.6.6.6",
+                "address": "dns.alidns.com",
+                "address_resolver": "dns_local",
                 "detour": "‹‹国内››"
             },
             {
@@ -46,11 +47,11 @@
             },
             {
                 "outbound": "any",
-                "server": "dns_local"
+                "server": "dns_direct"
             },
             {
                 "clash_mode": "Direct",
-                "server": "dns_local"
+                "server": "dns_direct"
             },
             {
                 "type": "logical",
@@ -90,7 +91,7 @@
                     "remote_private",
                     "remote_httpdns"
                 ],
-                "server": "dns_local"
+                "server": "dns_direct"
             },
             {
                 "rule_set": [
